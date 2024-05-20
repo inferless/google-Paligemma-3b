@@ -13,14 +13,13 @@ class InferlessPythonModel:
                                                                        device_map=device,revision="bfloat16",
                                                                        token="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").eval()
         self.processor = AutoProcessor.from_pretrained(model_id,
-                                                       device_map=device,
                                                        token="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")
 
     def infer(self,inputs):
         prompt = inputs["prompt"]
         image_url = inputs["image_url"]
         image = Image.open(requests.get(image_url, stream=True).raw)
-        model_inputs = self.processor(text=prompt, images=image, return_tensors="pt")
+        model_inputs = self.processor(text=prompt, images=image, return_tensors="pt").to("cuda")
         input_len = model_inputs["input_ids"].shape[-1]
 
         with torch.inference_mode():
