@@ -1,21 +1,28 @@
-import transformers
+from transformers import AutoProcessor, PaliGemmaForConditionalGeneration
+from PIL import Image
+import requests
 import torch
-
 
 class InferlessPythonModel:
     def initialize(self):
-        self.model_id = "Undi95/Meta-Llama-3-8B-hf"
-        self.pipeline = transformers.pipeline(
-            "text-generation",
-            model=self.model_id,
-            model_kwargs={"torch_dtype": torch.bfloat16},
-            device_map="auto"
-        )
+        model_id = "google/paligemma-3b-mix-224"
+        self.model = PaliGemmaForConditionalGeneration.from_pretrained(model_id,token="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").eval()
+        self.processor = AutoProcessor.from_pretrained(model_id,token="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")
 
-    def infer(self, inputs):
+    def infer(self,inputs):
         prompt = inputs["prompt"]
-        result = self.pipeline(prompt)[0]['generated_text']
-        return {"generated_text": result}
+        image_url = inputs["image_url"]
+        image = Image.open(requests.get(image_url, stream=True).raw)
+        model_inputs = self.processor(text=prompt, images=image, return_tensors="pt")
+        input_len = model_inputs["input_ids"].shape[-1]
+
+        with torch.inference_mode():
+            generation = self.model.generate(**model_inputs, max_new_tokens=100, do_sample=False)
+            generation = generation[0][input_len:]
+            decoded = self.processor.decode(generation, skip_special_tokens=True)
+
+        # Return a dictionary containing the result
+        return {'response': decoded}
 
     def finalize(self):
-        self.pipeline = None
+        pass
