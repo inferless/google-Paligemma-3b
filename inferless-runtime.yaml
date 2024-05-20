@@ -1,0 +1,6 @@
+build:
+  python_packages:
+    - "accelerate==0.29.3"
+    - "transformers==4.40.0"
+    - "torch==2.2.2"
+    - "xformers==0.0.25.post1"
