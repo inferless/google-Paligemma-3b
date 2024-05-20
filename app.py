@@ -27,7 +27,6 @@ class InferlessPythonModel:
             generation = generation[0][input_len:]
             decoded = self.processor.decode(generation, skip_special_tokens=True)
 
-        # Return a dictionary containing the result
         return {'response': decoded}
 
     def finalize(self):
