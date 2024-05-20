@@ -12,7 +12,9 @@ class InferlessPythonModel:
                                                                        torch_dtype=dtype,
                                                                        device_map=device,revision="bfloat16",
                                                                        token="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").eval()
-        self.processor = AutoProcessor.from_pretrained(model_id,token="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")
+        self.processor = AutoProcessor.from_pretrained(model_id,
+                                                       device_map=device,
+                                                       token="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")
 
     def infer(self,inputs):
         prompt = inputs["prompt"]
