@@ -6,7 +6,12 @@ import torch
 class InferlessPythonModel:
     def initialize(self):
         model_id = "google/paligemma-3b-mix-224"
-        self.model = PaliGemmaForConditionalGeneration.from_pretrained(model_id,token="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").eval()
+        device = "cuda:0"
+        dtype = torch.bfloat16
+        self.model = PaliGemmaForConditionalGeneration.from_pretrained(model_id,
+                                                                       torch_dtype=dtype,
+                                                                       device_map=device,revision="bfloat16",
+                                                                       token="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").eval()
         self.processor = AutoProcessor.from_pretrained(model_id,token="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")
 
     def infer(self,inputs):
