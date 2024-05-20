@@ -36,7 +36,7 @@ optional:
   # you can update file names here
   input_file_name: input.json
   output_file_name: output.json
-  runtime_file_name: inferless-runtime-config.yaml
+  runtime_file_name: inferless-runtime.yaml
 model_url: https://github.com/inferless/google-Paligemma-3b.git
 provider: GITHUB
 io_schema: true
