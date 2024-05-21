@@ -1,5 +1,5 @@
-# Llama3
-Llama3 is a LLM released by Meta. In this template we will import Llama3 on Inferless.
+# PaliGemma 3B
+PaliGemma 3B is a VLM released by Google. In this template we will import PaliGemma 3B on Inferless.
 
 ## Prerequisites
 - **Git**. You would need git installed on your system if you wish to customize the repo after forking.
