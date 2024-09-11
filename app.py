@@ -8,12 +8,8 @@ class InferlessPythonModel:
         model_id = "google/paligemma-3b-mix-224"
         device = "cuda:0"
         dtype = torch.bfloat16
-        self.model = PaliGemmaForConditionalGeneration.from_pretrained(model_id,
-                                                                       torch_dtype=dtype,
-                                                                       device_map=device,revision="bfloat16",
-                                                                       token="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").eval()
-        self.processor = AutoProcessor.from_pretrained(model_id,
-                                                       token="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")
+        self.model = PaliGemmaForConditionalGeneration.from_pretrained(model_id,torch_dtype=dtype,device_map=device,revision="bfloat16").eval()
+        self.processor = AutoProcessor.from_pretrained(model_id)
 
     def infer(self,inputs):
         prompt = inputs["prompt"]
