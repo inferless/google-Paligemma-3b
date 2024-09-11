@@ -1,4 +1,5 @@
 build:
+  cuda_version: "12.1.1"
   python_packages:
     - "pillow==10.3.0"
     - "accelerate==0.30.1"
