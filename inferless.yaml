@@ -1,6 +1,6 @@
 version: 1.0.0
 
-name: Paligemma-3b
+name: google-paligemma-3b
 import_source: GIT
 
 # you can choose the options between ONNX, TENSORFLOW, PYTORCH
@@ -40,6 +40,6 @@ optional:
   input_file_name: input.json
   output_file_name: output.json
   runtime_file_name: inferless-runtime-config.yaml
-model_url: https://github.com/inferless/google-Paligemma-3b.git
+model_url: https://github.com/inferless/google-paligemma-3b.git
 provider: GITHUB
 io_schema: true
